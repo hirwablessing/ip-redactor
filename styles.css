@@ -1,0 +1,24 @@
+html.ip-redact-on .ip-redact {
+  filter: blur(5px);
+  background: rgba(0, 0, 0, 0.06);
+  border-radius: 2px;
+  user-select: none;
+  cursor: not-allowed;
+}
+
+html.ip-redact-on input.ip-redact-input,
+html.ip-redact-on textarea.ip-redact-input {
+  filter: blur(5px);
+}
+
+html.ip-redact-on .ip-redact:hover::after {
+  content: "redacted";
+  position: absolute;
+  font-size: 10px;
+  background: #000;
+  color: #fff;
+  padding: 1px 4px;
+  border-radius: 2px;
+  filter: none;
+  margin-left: 4px;
+}

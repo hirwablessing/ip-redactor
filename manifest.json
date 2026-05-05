@@ -1,0 +1,23 @@
+{
+  "manifest_version": 3,
+  "name": "IP Redactor",
+  "version": "0.1.0",
+  "description": "Blur IP addresses on the page so they don't leak into screen recordings.",
+  "permissions": ["storage", "tabs"],
+  "host_permissions": ["<all_urls>"],
+  "action": {
+    "default_title": "Toggle IP redaction"
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"],
+      "css": ["styles.css"],
+      "run_at": "document_idle",
+      "all_frames": true
+    }
+  ]
+}
