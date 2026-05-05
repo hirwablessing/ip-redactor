@@ -126,7 +126,8 @@
     characterData: true,
   });
 
-  // Re-check input values on user typing
+  // User-typing path. Programmatic value assignments are handled in page.js
+  // (MAIN world) which patches the value setter for zero-flash redaction.
   document.addEventListener("input", (e) => {
     const t = e.target;
     if (t && (t.tagName === "INPUT" || t.tagName === "TEXTAREA")) {
@@ -138,13 +139,6 @@
       }
     }
   });
-
-  // Programmatic value changes (e.g. v-model assigning input.value) don't fire
-  // input events or DOM mutations — poll inputs periodically as a safety net.
-  setInterval(() => {
-    if (document.hidden) return;
-    scanInputs(document);
-  }, 250);
 
   // Apply initial state from storage
   chrome.storage.local.get(["enabled"], ({ enabled }) => {
